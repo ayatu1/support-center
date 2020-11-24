@@ -39,12 +39,7 @@
         async created() {
             this.loading = true
             try {
-                const response = await fetch(this.url + 'questions')
-                if(response.ok) {
-                    this.questions = await response.json()
-                } else {
-                    throw new Error('error')
-                }
+                this.questions = await this.$fetch('questions')
             }catch (e) {
                 this.error = e
             }
