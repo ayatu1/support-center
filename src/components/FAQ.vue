@@ -1,0 +1,58 @@
+<template>
+    <main class="faq">
+        <h1>frenquently</h1>
+        <div class="error" v-if="error">can't load the questions</div>
+        <Loading v-if="loading"></Loading>
+        <section class="list">
+            <article v-for="question in questions" :key="question._id">
+                <h2 v-html="question.title"></h2>
+                <p v-html="question.content"></p>
+            </article>
+        </section>
+    </main>
+</template>
+
+<script>
+    export default {
+        name: "FAQ",
+        data() {
+            return {
+                questions: [],
+                error: null,
+                url: 'http://localhost:3000/',
+                loading: false
+            }
+        },
+        // created() {
+        //     fetch(this.url + 'questions').then((response) => {
+        //             if(response.ok) {
+        //                 return response.json()
+        //             }else {
+        //                 return Promise.reject('error')
+        //             }
+        //         }).then((result) => {
+        //             this.questions = result
+        //     }).catch((e) => {
+        //         this.error = e
+        //     })
+        // },
+        async created() {
+            this.loading = true
+            try {
+                const response = await fetch(this.url + 'questions')
+                if(response.ok) {
+                    this.questions = await response.json()
+                } else {
+                    throw new Error('error')
+                }
+            }catch (e) {
+                this.error = e
+            }
+            this.loading = false
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
