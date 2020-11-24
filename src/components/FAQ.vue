@@ -4,7 +4,7 @@
         <div class="error" v-if="error">can't load the questions</div>
         <Loading v-if="loading"></Loading>
         <section class="list">
-            <article v-for="question in questions" :key="question._id">
+            <article v-for="question in questionList" :key="question._id">
                 <h2 v-html="question.title"></h2>
                 <p v-html="question.content"></p>
             </article>
@@ -13,14 +13,15 @@
 </template>
 
 <script>
+    import RemoteData from "../mixin/RemoteData";
+
     export default {
         name: "FAQ",
         data() {
             return {
-                questions: [],
+                // questions: [],
                 error: null,
-                url: 'http://localhost:3000/',
-                loading: false
+                loading: false,
             }
         },
         // created() {
@@ -36,15 +37,20 @@
         //         this.error = e
         //     })
         // },
-        async created() {
-            this.loading = true
-            try {
-                this.questions = await this.$fetch('questions')
-            }catch (e) {
-                this.error = e
-            }
-            this.loading = false
-        }
+        // async created() {
+        //     this.loading = true
+        //     try {
+        //         this.questions = await this.$fetch('questions')
+        //     }catch (e) {
+        //         this.error = e
+        //     }
+        //     this.loading = false
+        // },
+        mixins: [
+            RemoteData({
+                questionList: 'questions'
+            })
+        ]
     }
 </script>
 
