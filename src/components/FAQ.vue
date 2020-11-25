@@ -2,7 +2,7 @@
     <main class="faq">
         <h1>frenquently</h1>
         <div class="error" v-if="error">can't load the questions</div>
-        <Loading v-if="loading"></Loading>
+        <Loading v-if="remoteDataBusy"></Loading>
         <section class="list">
             <article v-for="question in questionList" :key="question._id">
                 <h2 v-html="question.title"></h2>
@@ -21,7 +21,7 @@
             return {
                 // questions: [],
                 error: null,
-                loading: false,
+                // loading: false,
             }
         },
         // created() {

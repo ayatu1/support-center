@@ -2,7 +2,8 @@ export default function (resources) {
     return {
         data() {
             let initData = {
-                // remoteDataLoading: 0
+                //请求的数量
+                remoteDataLoading: 0
             }
 
             //初始化initData各项
@@ -14,19 +15,24 @@ export default function (resources) {
         },
         methods: {
             async fetchResource(key, url) {
-                this.loading = true
+                this.remoteDataLoading++
                 try {
                     this.$data[key] = await this.$fetch(url)
                 }catch (e) {
                     this.error = e
                 }
-                this.loading = false
+                this.remoteDataLoading--
             }
         },
         created() {
             for(const key in resources) {
                 let url = resources[key]
                 this.fetchResource(key, url)
+            }
+        },
+        computed: {
+            remoteDataBusy() {
+                return this.remoteDataLoading !== 0 
             }
         }
     }
