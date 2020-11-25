@@ -17,13 +17,11 @@
 
     export default {
         name: "FAQ",
-        data() {
-            return {
-                // questions: [],
-                // error: null,
-                // loading: false,
-            }
-        },
+        mixins: [
+            RemoteData({
+                questionList: 'questions'
+            })
+        ]
         // created() {
         //     fetch(this.url + 'questions').then((response) => {
         //             if(response.ok) {
@@ -46,11 +44,6 @@
         //     }
         //     this.loading = false
         // },
-        mixins: [
-            RemoteData({
-                questionList: 'questions'
-            })
-        ]
     }
 </script>
 
