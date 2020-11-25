@@ -1,7 +1,7 @@
 <template>
     <main class="faq">
         <h1>frenquently</h1>
-        <div class="error" v-if="error">can't load the questions</div>
+        <div class="error" v-if="hasRemoteError">can't load the questions</div>
         <Loading v-if="remoteDataBusy"></Loading>
         <section class="list">
             <article v-for="question in questionList" :key="question._id">
@@ -20,7 +20,7 @@
         data() {
             return {
                 // questions: [],
-                error: null,
+                // error: null,
                 // loading: false,
             }
         },

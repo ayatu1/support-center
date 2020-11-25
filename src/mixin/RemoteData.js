@@ -3,12 +3,14 @@ export default function (resources) {
         data() {
             let initData = {
                 //请求的数量
-                remoteDataLoading: 0
+                remoteDataLoading: 0,
+                remoteErrors: {}
             }
 
             //初始化initData各项
             for(const key in resources) {
                 initData[key] = null
+                initData.remoteErrors[key] = null
             }
 
             return initData
@@ -16,10 +18,11 @@ export default function (resources) {
         methods: {
             async fetchResource(key, url) {
                 this.remoteDataLoading++
+                this.remoteErrors[key] = null
                 try {
                     this.$data[key] = await this.$fetch(url)
                 }catch (e) {
-                    this.error = e
+                    this.remoteErrors[key] = e
                 }
                 this.remoteDataLoading--
             }
@@ -32,7 +35,12 @@ export default function (resources) {
         },
         computed: {
             remoteDataBusy() {
-                return this.remoteDataLoading !== 0 
+                return this.remoteDataLoading !== 0
+            },
+            hasRemoteError() {
+                return Object.keys(this.remoteErrors).some((key) => {
+                    return this.remoteErrors[key]
+                })
             }
         }
     }
