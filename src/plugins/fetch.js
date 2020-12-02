@@ -8,8 +8,12 @@ export default {
     }
 }
 
-async function $fetch(url) {
-    const response = await fetch(baseUrl + url)
+async function $fetch(url, options) {
+    const finalOptions = Object.assign({}, {
+
+    })
+
+    const response = await fetch(baseUrl + url, finalOptions)
     if (response.ok) {
         const data = await response.json()
         return data
