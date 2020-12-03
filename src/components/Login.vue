@@ -11,8 +11,11 @@
                 <template v-slot:default>
                     <FormInput v-model="username" name="username" placeholder="Username"></FormInput>
                     <FormInput type="password" v-model="password" name="password" placeholder="Password"></FormInput>
-                    <FormInput type="password" v-model="password2" name="verify-password" placeholder="Retype Password" :invalid="retypePasswordError"></FormInput>
-                    <FormInput type="email" v-model="email" name="email" placeholder="Email"></FormInput>
+                    <template v-if="mode === 'signup'">
+                        <FormInput type="password" v-model="password2" name="verify-password" placeholder="Retype Password" :invalid="retypePasswordError"></FormInput>
+                        <FormInput type="email" v-model="email" name="email" placeholder="Email"></FormInput>
+                    </template>
+
                 </template>
                 <template v-slot:actions>
                     <template v-if="mode === 'login'">
@@ -58,11 +61,11 @@
             },
             //检查注册时是否有空字段
             signupValid() {
-                return this.password2 && this.email && !this.retypePasswordError()
+                return this.password2 && this.email && !this.retypePasswordError
             },
             //检查登录时是否有空字段
             valid() {
-                return this.username && this.password && (this.mode !== 'signup' || this.signupValid())
+                return this.username && this.password && (this.mode !== 'signup' || this.signupValid)
             }
         },
         methods: {
@@ -73,7 +76,16 @@
 
             },
             async signup() {
-
+                //创建账户
+                await this.$fetch('signup', {
+                    method: 'post',
+                    body: JSON.stringify({
+                        username: this.username,
+                        password: this.password,
+                        email: this.email
+                    })
+                })
+                this.mode = 'login'
             }
         }
     }

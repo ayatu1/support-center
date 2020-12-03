@@ -40,6 +40,7 @@
         },
         methods: {
             async submit() {
+                //统一处理提交错误
                 if(this.valid) {
                     this.error = null
                     try {
