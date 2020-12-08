@@ -8,7 +8,7 @@ export default {
     }
 }
 
-async function $fetch(url, options) {
+export async function $fetch(url, options) {
     const finalOptions = Object.assign({}, {
         headers: {
             'Content-Type': 'application/json'   //告诉服务器我们的请求主体时Json

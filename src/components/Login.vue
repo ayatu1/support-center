@@ -72,16 +72,21 @@
                 await this[this.mode]()
             },
             async login() {
-                //登录
-                this.$state.user = {username: this.username}
-                //     this.$fetch('login', {   //设置为全局状态的用户对象，这样每个组件都可以知道是否有已登录的用户
-                //     method: 'post',
-                //     body: JSON.stringify({
-                //         username: this.username,
-                //         password: this.password
-                //     })
-                // })
-                this.$router.replace(this.$route.params.wantedRoute || {name: 'home'})
+                //登录     (服务器/login有问题所以此处用try-catch来捕获，正常情况下不是这样写)
+                try {
+                    this.$fetch('login', {   //设置为全局状态的用户对象，这样每个组件都可以知道是否有已登录的用户
+                        method: 'post',
+                        body: JSON.stringify({
+                            username: this.username,
+                            password: this.password
+                        })
+                    })
+                }catch (e) {
+                    console.log(e)
+                }finally {
+                    this.$state.user = {username: this.username}
+                    this.$router.replace(this.$route.params.wantedRoute || {name: 'home'})
+                }
             },
             async signup() {
                 //创建账户
