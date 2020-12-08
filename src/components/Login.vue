@@ -15,7 +15,6 @@
                         <FormInput type="password" v-model="password2" name="verify-password" placeholder="Retype Password" :invalid="retypePasswordError"></FormInput>
                         <FormInput type="email" v-model="email" name="email" placeholder="Email"></FormInput>
                     </template>
-
                 </template>
                 <template v-slot:actions>
                     <template v-if="mode === 'login'">
@@ -73,7 +72,16 @@
                 await this[this.mode]()
             },
             async login() {
-
+                //登录
+                this.$state.user = {username: this.username}
+                //     this.$fetch('login', {   //设置为全局状态的用户对象，这样每个组件都可以知道是否有已登录的用户
+                //     method: 'post',
+                //     body: JSON.stringify({
+                //         username: this.username,
+                //         password: this.password
+                //     })
+                // })
+                this.$router.push({name: 'home'})
             },
             async signup() {
                 //创建账户
