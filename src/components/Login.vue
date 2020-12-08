@@ -81,7 +81,7 @@
                 //         password: this.password
                 //     })
                 // })
-                this.$router.push({name: 'home'})
+                this.$router.replace(this.$route.params.wantedRoute || {name: 'home'})
             },
             async signup() {
                 //创建账户

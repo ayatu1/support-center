@@ -20,5 +20,5 @@ new Vue({
     return h(AppLayout)
   },
   // ...AppLayout,
-  router,
+  router,   //将路由器提供给应用
 })
