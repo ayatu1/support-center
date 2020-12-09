@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import Home from "./components/Home"
 import FAQ from "./components/FAQ"
 import Login from './components/Login'
-// import TickesLayout from "./components/TickesLayout"
+import TickesLayout from "./components/TickesLayout"
 import Tickets from "./components/Tickets";
+import NewTicket from "./components/NewTicket";
 import state from './state'
 
 //安装此插件
@@ -16,8 +17,12 @@ const routes = [
     {path: '/login', name: 'login', component: Login,
         meta: {guest: true}  //访客路由，即仅限访客浏览
     },
-    {path: '/tickets', name: 'tickets', component: Tickets,
-        meta:  {private: true}    //已登录用户的私有路由
+    {path: '/tickets', component: TickesLayout,
+        meta:  {private: true},  //已登录用户的私有路由
+        children: [
+            {path: '', name: 'tickets', component: Tickets},
+            {path: 'new', name: 'new-ticket', component: NewTicket}
+        ]
     }
 ]
 
