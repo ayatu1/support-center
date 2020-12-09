@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import 'babel-polyfill'
+import state from "./state"
 import AppLayout from "./components/AppLayout"
 import router from "./router"
 import './global-components'
 import VueFetch, {$fetch} from './plugins/fetch'
-import state from "./state"
 import VueState from './plugins/state'
 import * as filters from './filters'
 

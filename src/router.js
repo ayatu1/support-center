@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from "./components/Home"
 import FAQ from "./components/FAQ"
 import Login from './components/Login'
-import TickesLayout from "./components/TickesLayout"
+// import TickesLayout from "./components/TickesLayout"
 import Tickets from "./components/Tickets";
 import state from './state'
 
