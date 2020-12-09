@@ -36,13 +36,13 @@ router.beforeEach((to, from, next) => {
     const username = localStorage.getItem('username')
 
     if(username) {    //用户登录了
-        if(to.meta.guest) {
+        if(to.matched.some(r => r.meta.guest)) {
             next({name: 'home'})
         }else {
             next()
         }
     }else {
-        if(to.meta.private) {
+        if(to.matched.some(r => r.meta.private)) {  //检查目标路由匹配的所有嵌套的路径对象
             next({name: 'login', params: {wantedRoute: to.fullPath}})
         }else {
             next()
