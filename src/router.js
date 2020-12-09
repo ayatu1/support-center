@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import FAQ from "./components/FAQ"
 import Login from './components/Login'
 import TickesLayout from "./components/TickesLayout"
+import Tickets from "./components/Tickets";
 import state from './state'
 
 //安装此插件
@@ -15,7 +16,7 @@ const routes = [
     {path: '/login', name: 'login', component: Login,
         meta: {guest: true}  //访客路由，即仅限访客浏览
     },
-    {path: '/tickets', name: 'tickets', component: TickesLayout,
+    {path: '/tickets', name: 'tickets', component: Tickets,
         meta:  {private: true}    //已登录用户的私有路由
     }
 ]

@@ -10,6 +10,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9"
   },
@@ -38,10 +39,10 @@
     },
     "rules": {
       "generator-star-spacing": "off",
-      "no-tabs":"off",
-      "no-unused-vars":"off",
-      "no-console":"off",
-      "no-irregular-whitespace":"off",
+      "no-tabs": "off",
+      "no-unused-vars": "off",
+      "no-console": "off",
+      "no-irregular-whitespace": "off",
       "no-debugger": "off"
     }
   },
