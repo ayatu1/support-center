@@ -12,9 +12,11 @@ Vue.use(VueRouter)
 const routes = [
     {path: '/', name: 'home', component: Home},
     {path: '/faq', name: 'faq', component: FAQ},
-    {path: '/login', name: 'login', component: Login},
+    {path: '/login', name: 'login', component: Login,
+        meta: {guest: true}  //访客路由，即仅限访客浏览
+    },
     {path: '/tickets', name: 'tickets', component: TickesLayout,
-        meta:  {private: true}
+        meta:  {private: true}    //已登录用户的私有路由
     }
 ]
 
@@ -25,11 +27,21 @@ const router = new VueRouter({
 
 //全局前置守卫
 router.beforeEach((to, from, next) => {
-    if(to.meta.private && !state.user) {
-        next({name: 'login', params: {wantedRoute: to.fullPath}})
-        return
+    const username = localStorage.getItem('username')
+
+    if(username) {    //用户登录了
+        if(to.meta.guest) {
+            next({name: 'home'})
+        }else {
+            next()
+        }
+    }else {
+        if(to.meta.private) {
+            next({name: 'login', params: {wantedRoute: to.fullPath}})
+        }else {
+            next()
+        }
     }
-    next()
 })
 
 

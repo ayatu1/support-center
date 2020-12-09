@@ -5,7 +5,7 @@
         <router-link :to="{name: 'tickets'}">Support tickets</router-link>
         <div class="spacer"></div>
         <template v-if="$state.user">
-            <a href="">{{$state.user.username}}</a>
+            <a>{{$state.user.username}}</a>
             <a href="" @click="logout">Logout</a>
         </template>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
@@ -16,10 +16,13 @@
     export default {
         name: "NavMenu",
         methods: {
-            async logout() {
+            async logout(e) {
+                e.preventDefault()
                 const result = await this.$fetch('logout')
-                if(result.states === 'ok') {
+                if(result.status === 'ok') {
                     this.$state.user = null
+                    localStorage.removeItem('username')
+                    this.$router.replace({name: 'home'})
                 }
             }
         }

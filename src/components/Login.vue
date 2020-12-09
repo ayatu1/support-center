@@ -84,7 +84,9 @@
                 }catch (e) {
                     console.log(e)
                 }finally {
-                    this.$state.user = {username: this.username}
+                    const username = this.username
+                    this.$state.user = {username: username}
+                    localStorage.setItem('username', username )
                     this.$router.replace(this.$route.params.wantedRoute || {name: 'home'})
                 }
             },
