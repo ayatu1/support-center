@@ -29,7 +29,7 @@
                 type: String,
                 required: true
             },
-            operation: {
+            operation: {  //提交表单时的处理函数
                 type: Function,
                 required: true
             },
@@ -39,7 +39,7 @@
             }
         },
         methods: {
-            async submit() {
+            async submit() {   //点击提交按钮时触发此函数
                 //统一处理提交错误
                 if(this.valid) {
                     this.error = null

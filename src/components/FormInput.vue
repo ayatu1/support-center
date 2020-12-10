@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <input
+        <component :is="element"
                 class="input"
                 :class="inputClass"
                 :type="type"
@@ -8,13 +8,15 @@
                 :name="name"
                 :placeholder="placeholder"
                 @input="update"
-        >
+                   v-bind="$attrs"
+        ></component>
     </div>
 </template>
 
 <script>
     export default {
         name: "FormInput",
+        inheritAttrs: false,
         props: {
             type: {
                 type: String,
@@ -44,6 +46,10 @@
                 return {
                     'invalid': this.invalid
                 }
+            },
+            element() {
+                //当类型是textarea时要渲染textarea而不是input
+                return this.type === 'textarea' ? 'textarea' : 'input'
             }
         }
     }
