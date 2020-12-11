@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import PersistantData from "../mixin/PersistantData";
+
     export default {
         name: "NewTicket",
         data() {
@@ -54,7 +56,13 @@
                 })
                 this.$router.push({name: 'tickets'})
             }
-        }
+        },
+        mixins: [
+            PersistantData('NewTickets', [
+                'title',
+                'description'
+            ])
+        ]
     }
 </script>
 
