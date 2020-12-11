@@ -13,7 +13,7 @@ export default {
 export async function $fetch(url, options) {
     const finalOptions = Object.assign({}, {
         headers: {
-            'Content-Type': 'application/json'   //告诉服务器我们的请求主体时Json
+            'Content-Type': 'application/json'   //告诉服务器我们的请求主体是Json格式
         },
         credentials: 'include'    //请求时携带cookie
     }, options)

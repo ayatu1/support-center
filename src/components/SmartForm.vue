@@ -39,7 +39,8 @@
             }
         },
         methods: {
-            async submit() {   //点击提交按钮时触发此函数
+            async submit(e) {   //点击提交按钮时触发此函数
+                e.preventDefault()
                 //统一处理提交错误
                 if(this.valid) {
                     this.error = null

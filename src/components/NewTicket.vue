@@ -20,6 +20,11 @@
                     rows="4"
             >
             </FormInput>
+
+            <template v-slot:actions>
+                <router-link tag="button" :to="{name: 'tickets'}" class="secondary">Go back</router-link>
+                <button type="submit" :disabled="!valid">Send ticket</button>
+            </template>
         </SmartForm>
     </div>
 </template>
@@ -35,12 +40,19 @@
         },
         computed: {
             valid() {
-                return this.title && this.description
+                return !!this.title && !!this.description
             }
         },
         methods: {
-            async operation() {
-
+            async operation(e) {
+                await this.$fetch('tickets/new', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: this.title,
+                        description: this.description
+                    })
+                })
+                this.$router.push({name: 'tickets'})
             }
         }
     }
