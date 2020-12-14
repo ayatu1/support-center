@@ -35,7 +35,15 @@ export default function (resources) {
             //遍历所有的url
             for(const key in resources) {
                 let url = resources[key]
-                this.fetchResource(key, url)
+                if(typeof url === 'function') {
+                    this.$watch('id', (val) => {
+                        this.fetchResource(key, `ticket/${val}`)
+                    }, {
+                        immediate: true
+                    })
+                } else {
+                    this.fetchResource(key, url)
+                }
             }
         },
         computed: {
