@@ -5,8 +5,9 @@ import FAQ from "./components/FAQ"
 import Login from './components/Login'
 import TickesLayout from "./components/TickesLayout"
 import Tickets from "./components/Tickets"
-import Ticket from "./components/Ticket";
-import NewTicket from "./components/NewTicket";
+import Ticket from "./components/Ticket"
+import NewTicket from "./components/NewTicket"
+import NotFound from "./components/NotFound";
 import state from './state'
 
 //安装此插件
@@ -25,7 +26,8 @@ const routes = [
             {path: 'new', name: 'new-ticket', component: NewTicket},
             {path: ':id', name: 'ticket', component: Ticket, props: true}  //使用props将组件与路由解耦
         ]
-    }
+    },
+    {path: '*', component: NotFound}
 ]
 
 const router = new VueRouter({

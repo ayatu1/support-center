@@ -42,6 +42,7 @@
         //     }
         // },
         mixins: [
+            //接收id的过程是异步的，所以此处传入方法给RemoteData
             RemoteData({'ticket':() => {
                 return `ticket/${this.id}`
             }})

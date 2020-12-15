@@ -20,8 +20,6 @@ for(let key in filters) {
   Vue.filter(key, filters[key])
 }
 
-
-
 new Vue({
   el: '#app',
   data: state,
