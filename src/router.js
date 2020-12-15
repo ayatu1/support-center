@@ -4,7 +4,8 @@ import Home from "./components/Home"
 import FAQ from "./components/FAQ"
 import Login from './components/Login'
 import TickesLayout from "./components/TickesLayout"
-import Tickets from "./components/Tickets";
+import Tickets from "./components/Tickets"
+import Ticket from "./components/Ticket";
 import NewTicket from "./components/NewTicket";
 import state from './state'
 
@@ -21,7 +22,8 @@ const routes = [
         meta:  {private: true},  //已登录用户的私有路由
         children: [
             {path: '', name: 'tickets', component: Tickets},
-            {path: 'new', name: 'new-ticket', component: NewTicket}
+            {path: 'new', name: 'new-ticket', component: NewTicket},
+            {path: ':id', name: 'ticket', component: Ticket, props: true}  //使用props将组件与路由解耦
         ]
     }
 ]

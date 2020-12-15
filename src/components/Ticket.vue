@@ -32,14 +32,20 @@
         name: "Ticket",
         props: {
             id: {
-                type: String,
-                required: true
+               type: String,
+               required: true
             }
         },
+        // computed: {
+        //     id() {
+        //         return this.$route.params.id
+        //     }
+        // },
         mixins: [
             RemoteData({'ticket':() => {
                 return `ticket/${this.id}`
             }})
+            // RemoteData({'ticket': `ticket/${this.id}`})
         ]
     }
 </script>
