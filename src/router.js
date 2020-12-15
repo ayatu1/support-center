@@ -32,7 +32,16 @@ const routes = [
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
+    scrollBehavior (to, from, savedPosition) {  //管理页面的滚动行为
+        if(savedPosition) {
+            return savedPosition
+        }
+        if(to.hash) {
+            return {selector: to.hash}
+        }
+        return { x: 0, y: 0 }
+    }
 })
 
 //全局前置守卫
